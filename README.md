@@ -6,38 +6,25 @@ This project includes:
 	2.1 A singleton session bean, named StatsEJBSingleton, with local and remote interfaces MyStatsSingletonLocal, MyStatsSingletonRemote. 
 		Both interfaces contains the following methods.
 			addData(double): adding a data element
-			
 			getCount(): returning the number of elements
-			
 			stats() : computing the descriptive statistics
-			
-			saveModel(): saving the serializable object, StatsSummary (just contains the attributes of the simple statistics), to file C:/tmp/enterprise/model/stats.bin
-			
+			saveModel(): saving the serializable object, StatsSummary (just contains the attributes of the simple statistics), to file C:/tmp/enterprise/model/stats.bin	
 		The StatsEJBSingleton contains array list to hold data of double type and implementations of the interface methods.
 	
 	2.2 A stateless session bean, named StatsEJBStateless, local and remote interfaces StatsEJBStatelessLocal, StatsEJBStatelessRemote. 
 		Both local and remote interfaces contain methods.
 			getCount(): returning the data count
-			
 			getMin():   getting the minimum element
-			
-			
 			getMax():   getting maximum element
-			
 			getMean():  getting the mean
-			
 			getSTD():   getting the standard deviation
-			
 			toString(): returning a String of the simple stats summary
 		The StatsEJBStateless contains a load method loadModel(), which load the C:/tmp/enterprise/model/stats.bin and return StatsSummary object. StatsEJBStateless also contains the implementation of interface methods. Each of them will call load() function and get the required properties from the returned StatsSummary object.
 	
 	2.3 A stateful session bean, named StatsEJBStateful, local and remote interfaces StatsEJBStatefulLocal, StatsEJBStatefulRemote. 
 		The StatsEJBStateful injects StatsEJBSingleton 	and	  StatsEJBStateless. Both interfaces contains methods:
-			
 			insertData(double): to the StatsEJBSingleton object.
-			
 			createModel() : save the stats summary model StatsEJBSingleton. 
-			
 			getStats() : get the stats summary string by the StatsEJBStateless object. 
 3. EJB client, named stats-ejb-client, which tests the remote interface methods of the three EJBs
 4. A Web component, named stats-ejb-web, which contains three Servlet programs:
